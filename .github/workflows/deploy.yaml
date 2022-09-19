@@ -28,4 +28,16 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: ${{ secrets.REGISTRY }}/${{ github.REPOSITORY_OWNER }}:latest
+
+    - name: 'Deploy to Azure Container Instances'
+      uses: 'azure/aci-deploy@v1'
+      with:
+        resource-group: ${{ github.REPOSITORY_OWNER }}-container
+        dns-name-label: ${{ github.REPOSITORY_OWNER }}${{ github.run_number }}
+        image: ${{ secrets.REGISTRY }}/${{ github.REPOSITORY_OWNER }}:latest
+        registry-login-server: ${{ secrets.REGISTRY }}
+        registry-username: ${{ secrets.REG_USER }}
+        registry-password: ${{ secrets.REG_PW }}
+        name: ${{ github.REPOSITORY_OWNER }}
+        location: 'north europe'
         
