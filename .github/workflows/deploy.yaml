@@ -29,9 +29,16 @@ jobs:
         push: true
         tags: ${{ secrets.REGISTRY }}/${{ github.REPOSITORY_OWNER }}:latest
 
-    - uses: Azure/login@v1
+    - uses: 'Azure/login@v1'
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Azure CLI script
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.30.0
+        inlineScript: |
+          az group create ${{ github.REPOSITORY_OWNER }}-container
 
     - name: 'Deploy to Azure Container Instances'
       uses: 'azure/aci-deploy@v1'
