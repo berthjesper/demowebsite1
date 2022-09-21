@@ -44,4 +44,3 @@ jobs:
         registry-password: ${{ secrets.REG_PW }}
         name: ${{ github.REPOSITORY_OWNER }}
         location: 'north europe'
-        
