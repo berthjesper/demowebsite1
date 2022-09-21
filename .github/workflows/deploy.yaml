@@ -38,7 +38,7 @@ jobs:
       with:
         azcliversion: 2.30.0
         inlineScript: |
-          az group create ${{ github.REPOSITORY_OWNER }}-container
+          az group create --location northeurope --resource-group ${{ github.REPOSITORY_OWNER }}-container
 
     - name: 'Deploy to Azure Container Instances'
       uses: 'azure/aci-deploy@v1'
